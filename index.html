@@ -44,9 +44,23 @@
 
   <!-- HERO -->
   <div style="background:#1C1714; padding:clamp(40px, 10vw, 68px) clamp(20px, 5vw, 48px) clamp(50px, 12vw, 86px); position:relative; overflow:hidden;">
-    <video style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.4;" autoplay="" muted="" loop="" playsinline="" preload="auto">
+    <video id="dpoyo-hero-video" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.4;" autoplay="" muted="" loop="" playsinline="" preload="auto">
       <source src="./uploads/video-hero.mp4" type="video/mp4">
     </video>
+    <script>
+      (function() {
+        var v = document.getElementById('dpoyo-hero-video');
+        if (!v) return;
+        function forceLoop() {
+          v.currentTime = 0;
+          v.play().catch(function(){});
+        }
+        v.addEventListener('ended', forceLoop);
+        v.addEventListener('pause', function() {
+          if (!document.hidden) v.play().catch(function(){});
+        });
+      })();
+    </script>
     <div style="position:absolute; inset:0; background:#000; opacity:.35;"></div>
     
     <div style="position:relative; z-index:1; display:grid; grid-template-columns:1fr; gap:clamp(20px, 5vw, 40px); align-items:center;">
@@ -113,10 +127,6 @@
     <div style="text-align:center; margin-bottom:clamp(30px, 6vw, 40px);">
       <h2 style="font-family:'Anton',sans-serif; font-size:clamp(48px, 15vw, 72px); color:#FFC629; margin:0; letter-spacing:2px;">PRONTO</h2>
       <p style="font-family:'Space Mono',monospace; font-size:clamp(12px, 3vw, 14px); color:#888; margin:clamp(16px, 3vw, 20px) 0 0; letter-spacing:1px;">TIENDA OFICIAL D'POYO</p>
-    </div>
-  </div>
-    <div style="text-align:center; margin-top:clamp(24px, 5vw, 34px);">
-      <a href="Tienda.dc.html" style="font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(11px, 2.5vw, 12px); letter-spacing:2px; text-transform:uppercase; background:#FFF7EA; color:#1C1714; border:none; padding:clamp(12px, 3vw, 15px) clamp(28px, 5vw, 36px); border-radius:2px; cursor:pointer; display:inline-block; text-decoration:none;">Ver todo el catálogo →</a>
     </div>
   </div>
 
