@@ -44,53 +44,17 @@
 
   <!-- HERO -->
   <div style="background:#1C1714; padding:clamp(40px, 10vw, 68px) clamp(20px, 5vw, 48px) clamp(50px, 12vw, 86px); position:relative; overflow:hidden;">
-    <video id="dpoyo-hero-video" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.4;" autoplay="" muted="" loop="" playsinline="" preload="auto">
+    <video id="dpoyo-hero-video" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.4;" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto">
       <source src="./uploads/video-hero.mp4" type="video/mp4">
     </video>
     <script>
       (function() {
         var v = document.getElementById('dpoyo-hero-video');
         if (!v) return;
-        v.muted = true;
-        v.loop = true;
-        v.setAttribute('muted', '');
-        v.setAttribute('loop', '');
-        setInterval(function() {
-          if (!v.loop) v.loop = true;
-          if (!v.muted) v.muted = true;
-        }, 500);
-        function forceLoop() {
+        v.addEventListener('ended', function() {
           v.currentTime = 0;
           v.play().catch(function(){});
-        }
-        function tryPlay() {
-          v.muted = true;
-          v.play().catch(function(){});
-        }
-        v.addEventListener('ended', forceLoop);
-        v.addEventListener('pause', function() {
-          if (!document.hidden) v.play().catch(function(){});
         });
-        v.addEventListener('loadedmetadata', tryPlay);
-        v.addEventListener('canplay', tryPlay);
-        document.addEventListener('visibilitychange', function() {
-          if (!document.hidden) v.play().catch(function(){});
-        });
-        tryPlay();
-        v.addEventListener('error', function() {
-          var e = v.error;
-          var msg = 'VIDEO ERROR code=' + (e ? e.code : 'unknown') + ' msg=' + (e ? e.message : '');
-          var d = document.createElement('div');
-          d.textContent = msg;
-          d.style.cssText = 'position:absolute;top:0;left:0;z-index:99;background:red;color:white;padding:8px;font-size:14px;font-family:monospace;';
-          v.parentElement.appendChild(d);
-        });
-        setTimeout(function() {
-          var d = document.createElement('div');
-          d.textContent = 'DEBUG: readyState=' + v.readyState + ' networkState=' + v.networkState + ' paused=' + v.paused + ' error=' + (v.error ? v.error.code : 'none');
-          d.style.cssText = 'position:absolute;top:0;left:0;z-index:99;background:lime;color:black;padding:8px;font-size:14px;font-family:monospace;';
-          v.parentElement.appendChild(d);
-        }, 3000);
       })();
     </script>
     <div style="position:absolute; inset:0; background:#000; opacity:.35;"></div>
