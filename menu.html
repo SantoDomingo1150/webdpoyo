@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Barlow+Condensed:wght@700;900&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; }
+    @keyframes menu-fade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+</helmet>
+
+<div style="background:#fff; min-height:100vh; width:100%; display:flex; flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="background:#1C1714; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #FFC629; position:sticky; top:0; z-index:100; gap:12px;">
+    <a href="index.html" style="font-family:'Anton',sans-serif; font-size:clamp(18px, 5vw, 26px); color:#FFF7EA; letter-spacing:1px; text-decoration:none;"><span style="color:#FFC629;">D'</span>POYO</a>
+    <div style="display:flex; align-items:center; gap:clamp(12px, 3vw, 24px); margin-left:auto;">
+      <a href="index.html" style="font-family:'Space Mono',monospace; font-size:clamp(10px, 2.5vw, 12px); letter-spacing:1.5px; text-transform:uppercase; color:#FFF7EA; white-space:nowrap; text-decoration:none;">Inicio</a>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(10px, 2.5vw, 12px); letter-spacing:1.5px; text-transform:uppercase; color:#FFF7EA; border-bottom:2px solid #FFC629; padding-bottom:2px; white-space:nowrap;">Menú</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div style="background:#1C1714; padding:clamp(32px, 7vw, 48px) clamp(20px, 5vw, 48px) clamp(28px, 6vw, 40px); text-align:center;">
+    <h1 style="font-family:'Anton',sans-serif; font-size:clamp(36px, 10vw, 64px); color:#FFF7EA; letter-spacing:1px; margin:0 0 8px;">MENÚ <span style="color:#FFC629;">D'POYO</span></h1>
+    <p style="font-family:'Space Mono',monospace; font-size:clamp(11px, 2.5vw, 13px); color:#888; letter-spacing:1px;">Elige una categoría</p>
+  </div>
+
+  <!-- CATEGORY GRID -->
+  <sc-if value="{{ !selectedCategory }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:clamp(24px, 5vw, 40px) clamp(16px, 4vw, 36px); background:#111; flex:1;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:clamp(12px, 2.5vw, 18px); max-width:1100px; margin:0 auto;">
+        <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
+          <button onClick="{{ openCategory }}" data-cat-id="{{ cat.id }}" style="background:#1C1714; border:2px solid #2a2420; border-radius:8px; padding:clamp(20px, 4vw, 28px) clamp(12px, 2.5vw, 16px); display:flex; flex-direction:column; align-items:center; gap:10px; cursor:pointer; transition:border-color .2s ease;">
+            <span style="font-size:clamp(32px, 7vw, 44px); line-height:1;">{{ cat.icon }}</span>
+            <span style="font-family:'Anton',sans-serif; font-size:clamp(12px, 2.6vw, 14px); color:#FFF7EA; letter-spacing:0.6px; text-align:center;">{{ cat.name }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- CATEGORY DETAIL -->
+  <sc-if value="{{ selectedCategory }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:clamp(24px, 5vw, 40px) clamp(16px, 4vw, 36px); background:#111; flex:1;">
+      <div style="max-width:900px; margin:0 auto;">
+        <button onClick="{{ closeCategory }}" style="background:none; border:none; color:#FFC629; font-family:'Space Mono',monospace; font-size:clamp(11px, 2.5vw, 13px); letter-spacing:1px; cursor:pointer; padding:0 0 clamp(20px, 4vw, 28px); display:flex; align-items:center; gap:6px;">← VOLVER A CATEGORÍAS</button>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:clamp(20px, 4vw, 28px);">
+          <span style="font-size:clamp(32px, 6vw, 40px);">{{ selectedCategory.icon }}</span>
+          <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px, 6vw, 36px); color:#FFC629; letter-spacing:1px;">{{ selectedCategory.name }}</h2>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr; gap:clamp(10px, 2vw, 14px);">
+          <sc-for list="{{ selectedCategory.items }}" as="item" hint-placeholder-count="3">
+            <div style="background:#1C1714; border:1px solid #2a2420; border-radius:8px; padding:clamp(16px, 3vw, 20px); display:flex; align-items:center; gap:clamp(14px, 3vw, 18px);">
+              <div style="width:clamp(48px, 10vw, 60px); height:clamp(48px, 10vw, 60px); background:#2a2420; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:clamp(20px, 4vw, 26px);">{{ selectedCategory.icon }}</div>
+              <div style="flex:1;">
+                <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3vw, 17px); color:#FFF7EA; letter-spacing:0.5px; margin:0;">{{ item.name }}</h3>
+                <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-family:'DM Sans',sans-serif; font-size:clamp(11px, 2.6vw, 13px); color:#999; margin:4px 0 0;">{{ item.desc }}</p>
+                </sc-if>
+              </div>
+              <span style="font-family:'Space Mono',monospace; font-size:clamp(13px, 3vw, 15px); color:#FFC629; font-weight:700; white-space:nowrap;">{{ item.price }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <div style="background:#0a0a0a; text-align:center; padding:clamp(14px, 3vw, 18px) clamp(16px, 4vw, 20px); font-family:'Space Mono',monospace; font-size:clamp(8px, 2vw, 10px); letter-spacing:1.5px; color:#555;">© D'POYO 2026 · HECHO CON CALLE Y PICANTE</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100vh&quot;}}">
+class Component extends DCLogic {
+  state = { selectedCategoryId: null };
+
+  categories = [
+    { id: 'combos', icon: '🍗', name: "COMBOS", items: [
+      { name: "COMBO ALITAS", desc: "4 Alas + papa regular + Bebida", price: "" },
+      { name: "COMBO CHICKEN STRIPS", desc: "3 Strips + papa regular + Bebida", price: "" },
+      { name: "COMBO 2 PRESAS", desc: "2 Presas + papa regular + Bebida", price: "" },
+      { name: "COMBO CHICKEN POP", desc: "Chicken Pop + papa regular + Bebida", price: "" },
+      { name: "CAJITA D'KIDS", desc: "Chicken pop o nuggets + papas fritas + jugo o bebida + corona y juguete", price: "" },
+      { name: "COMBO FAMILIAR \"XL\"", desc: "6 Strips + 6 Alas + 4 Presas + Chicken Pop + 6 Empanadas + 2 Ensalada de Repollo + 1 Papa Familiar + 1 Bebida 1.5LT", price: "" },
+      { name: "COMBO FAMILIAR \"L\"", desc: "12 Strips + 1 Papa Familiar + 6 Empanadas + 1 Ensalada Repollo + 4 Vasos de Bebida", price: "" },
+      { name: "COMBO MIX", desc: "4 Alas + 2 Presas + Chicken Pop + 1 Ensalada de Repollo + 2 Papas Regulares + 2 Vasos de Bebida", price: "" },
+    ]},
+    { id: 'papas', icon: '🍟', name: "PAPAS & STRIPS", items: [
+      { name: "SALCHIPAPAS", price: "$X.XXX" },
+      { name: "PAPAS DELUXE", price: "$X.XXX" },
+      { name: "STRIPS TAKIS", price: "$X.XXX" },
+      { name: "STRIPS DELUXE", price: "$X.XXX" },
+    ]},
+    { id: 'conos', icon: '🍦', name: "SUPER CONO", items: [
+      { name: "ALITAS TAKIS", price: "" },
+      { name: "ALITAS BBQ", price: "" },
+      { name: "ALITAS ACEVICHADAS", price: "" },
+      { name: "ALITAS MARACUYA", price: "" },
+      { name: "ALITAS DRAGÓN", price: "" },
+      { name: "CARRETILLA", price: "" },
+      { name: "LOMO SALTADO", price: "" },
+      { name: "AJÍ DE GALLINA", price: "" },
+      { name: "FRITO DE CERDO", price: "" },
+      { name: "POLLO MOSTAZA", price: "" },
+      { name: "CARNE MECHADA", price: "" },
+    ]},
+    { id: 'alitas', icon: '🔥', name: "ALITAS", items: [
+      { name: "SUPER ALAS", price: "$X.XXX" },
+    ]},
+    { id: 'kids', icon: '👶', name: "D'KIDS", items: [
+      { name: "CAJITA D'KIDS", price: "$X.XXX" },
+    ]},
+    { id: 'bebidas', icon: '🍋', name: "BEBIDAS", items: [
+      { name: "D'FRESH", price: "$X.XXX" },
+    ]},
+    { id: 'salsas', icon: '🌶️', name: "SALSAS", items: [
+      { name: "SALSEATE", price: "$X.XXX" },
+    ]},
+    { id: 'toppings', icon: '🧀', name: "TOPPINGS", items: [
+      { name: "TOPPING CLÁSICO", price: "$X.XXX" },
+      { name: "TOPPING PREMIUM", price: "$X.XXX" },
+    ]},
+    { id: 'extras', icon: '➕', name: "ACOMPAÑAMIENTOS Y EXTRAS", items: [
+      { name: "ACOMPAÑAMIENTOS Y EXTRAS", price: "$X.XXX" },
+    ]},
+  ];
+
+  openCategory = (e) => {
+    const id = e.target.closest('button').getAttribute('data-cat-id');
+    this.setState({ selectedCategoryId: id });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  closeCategory = () => {
+    this.setState({ selectedCategoryId: null });
+  };
+
+  renderVals() {
+    const selectedCategory = this.categories.find(c => c.id === this.state.selectedCategoryId) || null;
+    return {
+      categories: this.categories,
+      selectedCategory,
+      openCategory: this.openCategory,
+      closeCategory: this.closeCategory,
+    };
+  }
+}
+</script>
+</body>
+</html>
