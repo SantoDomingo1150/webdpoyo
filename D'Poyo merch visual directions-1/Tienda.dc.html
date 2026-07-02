@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; }
+  </style>
+</helmet>
+
+<div style="background:#fff; min-height:100vh; width:100%; display:flex; flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="background:#1C1714; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #FFC629; position:sticky; top:0; z-index:100; gap:12px;">
+    <a href="index.dc.html" style="text-decoration:none;">
+      <span style="font-family:'Anton',sans-serif; font-size:clamp(18px, 5vw, 26px); color:#FFF7EA; letter-spacing:1px;"><span style="color:#FFC629;">D'</span>POYO</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:clamp(12px, 3vw, 24px); margin-left:auto;">
+      <a href="index.dc.html" style="font-family:'Space Mono',monospace; font-size:clamp(10px, 2.5vw, 12px); letter-spacing:1.5px; text-transform:uppercase; color:#FFF7EA; white-space:nowrap; text-decoration:none;">Inicio</a>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(10px, 2.5vw, 12px); letter-spacing:1.5px; text-transform:uppercase; color:#FFC629; white-space:nowrap; border-bottom:2px solid #FFC629; padding-bottom:2px;">Tienda</span>
+
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div style="background:#1C1714; padding:clamp(30px, 8vw, 50px) clamp(20px, 5vw, 48px); border-bottom:3px solid #FFC629; position:relative; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:#000; opacity:.35;"></div>
+    <div style="position:relative; z-index:1;">
+      <h1 style="font-family:'Anton',sans-serif; font-size:clamp(32px, 10vw, 50px); color:#FFF7EA; margin:0 0 clamp(8px, 2vw, 12px); letter-spacing:1px; text-align:center;">TIENDA D'POYO</h1>
+      <p style="font-family:'DM Sans',sans-serif; color:#b09a84; font-size:clamp(13px, 3vw, 15px); margin:0 auto; text-align:center; display:block;">Merch oficial del cono que manda en Santiago</p>
+    </div>
+  </div>
+
+  <!-- PRODUCTS GRID -->
+  <div style="background:#111; padding:clamp(40px, 8vw, 60px) clamp(16px, 4vw, 36px); flex:1;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:clamp(16px, 3vw, 20px); max-width:1400px; margin:0 auto;">
+      
+      <div style="text-align:center; padding:clamp(80px, 15vw, 100px) 0;">
+        <h2 style="font-family:'Anton',sans-serif; font-size:clamp(64px, 18vw, 96px); color:#FFF7EA; margin:0; letter-spacing:2px; text-shadow:2px 2px 8px rgba(0,0,0,0.8), -2px -2px 8px rgba(255,198,41,0.3);">PRONTO</h2>
+      </div>
+    </div>
+
+
+
+
+
+    </div>
+  </div>
+
+  <!-- STORY — Two column: text + map -->
+  <div style="padding:clamp(28px, 5vw, 40px) clamp(20px, 5vw, 48px); background-color:#ffc52a; display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px, 4vw, 36px); align-items:start;" data-story-grid="">
+    <!-- LEFT: Text + Stats + Locations -->
+    <div>
+      <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px, 6vw, 32px); color:#000; margin:0 0 clamp(8px, 2vw, 10px); line-height:1.1;"><span style="font-size: clamp(24px, 6vw, 32px);">DONDE NOS ENCUENTRAS ?<br></span><span style="font-size: clamp(24px, 6vw, 32px);">BUSCA TU D'POYO FAVORITO</span></h2>
+      <p></p>
+      
+      <!-- Stats -->
+      
+
+      <!-- Locations — Grid 2 columns -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(10px, 2vw, 12px); margin-bottom:clamp(16px, 3vw, 20px);">
+        <button onClick="{{ selectLocation }}" data-location="Estado 23, Santiago, Chile" style="background:#fff; padding:clamp(12px, 2.5vw, 14px); border-radius:4px; border:none; border-left:4px solid #1C1714; text-align:left; cursor:pointer; transition:all 0.3s ease;">
+          <span style="font-family:'Anton',sans-serif; font-size:clamp(11px, 2.2vw, 12px); color:#1C1714; display:block; text-transform:uppercase; letter-spacing:0.8px;">📍 D'POYO ESTADO</span>
+          <p style="font-family:'DM Sans',sans-serif; font-size:clamp(10px, 2.2vw, 12px); color:#000; margin:4px 0 0; font-weight:500;">Estado 23, Santiago, Chile</p>
+        </button>
+        <button onClick="{{ selectLocation }}" data-location="Huerfanos 859, Santiago, Chile" style="background:#fff; padding:clamp(12px, 2.5vw, 14px); border-radius:4px; border:none; border-left:4px solid #1C1714; text-align:left; cursor:pointer; transition:all 0.3s ease;">
+          <span style="font-family:'Anton',sans-serif; font-size:clamp(11px, 2.2vw, 12px); color:#1C1714; display:block; text-transform:uppercase; letter-spacing:0.8px;">📍 D'POYO HUÉRFANOS</span>
+          <p style="font-family:'DM Sans',sans-serif; font-size:clamp(10px, 2.2vw, 12px); color:#000; margin:4px 0 0; font-weight:500;">Huérfanos 859, Santiago, Chile</p>
+        </button>
+      </div>
+
+      <!-- Social Media Links — Below Locations -->
+      <div style="display:flex; flex-direction:column; gap:clamp(10px, 2vw, 12px);">
+        <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3.5vw, 16px); color:#000; margin:0; text-transform:uppercase; letter-spacing:1px;">¡SÍGUENOS ACÁ!</h3>
+        <div style="display:flex; gap:clamp(14px, 3vw, 18px); align-items:center;">
+          <a href="https://www.instagram.com/DPOYO_OFICIAL" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; width:clamp(40px, 8vw, 48px); height:clamp(40px, 8vw, 48px); background:#000; border-radius:50%; transition:transform 0.2s ease;">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(16px, 55%, 20px); height:clamp(16px, 55%, 20px);">
+              <path d="M22.3,8.4c-0.8,0-1.4,0.6-1.4,1.4c0,0.8,0.6,1.4,1.4,1.4c0.8,0,1.4-0.6,1.4-1.4C23.7,9,23.1,8.4,22.3,8.4z" fill="#FFD307"></path>
+              <path d="M16,10.2c-3.3,0-5.9,2.7-5.9,5.9s2.7,5.9,5.9,5.9s5.9-2.7,5.9-5.9S19.3,10.2,16,10.2z M16,19.9c-2.1,0-3.8-1.7-3.8-3.8c0-2.1,1.7-3.8,3.8-3.8c2.1,0,3.8,1.7,3.8,3.8C19.8,18.2,18.1,19.9,16,19.9z" fill="#FFD307"></path>
+              <path d="M20.8,4h-9.5C7.2,4,4,7.2,4,11.2v9.5c0,4,3.2,7.2,7.2,7.2h9.5c4,0,7.2-3.2,7.2-7.2v-9.5C28,7.2,24.8,4,20.8,4z M25.7,20.8c0,2.7-2.2,5-5,5h-9.5c-2.7,0-5-2.2-5-5v-9.5c0-2.7,2.2-5,5-5h9.5c2.7,0,5,2.2,5,5V20.8z" fill="#FFD307"></path>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@dpoyo_oficial" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; width:clamp(40px, 8vw, 48px); height:clamp(40px, 8vw, 48px); background:#000; border-radius:50%; transition:transform 0.2s ease;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:clamp(16px, 55%, 20px); height:clamp(16px, 55%, 20px);">
+              <path d="M20 7.50414C18.5333 7.56942 15.52 6.75998 15.2 3H12.4V13.9666C12.4 17.0999 9.93253 18.4412 8.289 17.2507C6.20169 15.7389 7.60003 12.5958 10.2 12.9874V9.6583C8.20003 9.6583 4 10.4416 4 15.3374C4 21.6041 10.8146 21.4083 12.4 20.5824C14.9798 19.2385 15.6 17.7827 15.6 14.5541C15.6 11.6166 15.6 9.85413 15.6 9.0708C16.2667 9.39719 18.08 10.0891 20 10.2458" stroke="#FFD307" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Map -->
+    <div style="display:flex; flex-direction:column; gap:clamp(14px, 3vw, 20px); height:100%;">
+      <div style="border-radius:4px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,.15); aspect-ratio:1/1; min-height:260px;">
+        <iframe id="locationMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.7208385934847!2d-70.66381!3d-33.43729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665320f3e5c5555%3A0x1234567890ab!2sEstado%2023%2C%20Santiago%2C%20Chile!5e0!3m2!1ses!2scl!4v1719100000000" style="width:100%; height:100%; border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); background:#1C1714;">
+    <button onClick="{{ scrollToMap }}" style="padding:clamp(24px, 5vw, 36px) clamp(16px, 4vw, 20px); border-right:1px solid #2a2420; border:none; background:none; cursor:pointer; text-align:left;">
+      <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3.5vw, 18px); color:#FFF7EA; margin:0 0 clamp(4px, 1vw, 5px);">Ubicaciones</h3>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(8px, 2vw, 10px); letter-spacing:1px; color:#666;">Estado 23, Stgo.<br>Huerfanos 859, Stgo.<br></span>
+    </button>
+    <div style="padding:clamp(24px, 5vw, 36px) clamp(16px, 4vw, 20px); border-right:1px solid #2a2420;">
+      <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3.5vw, 18px); color:#FFF7EA; margin:0 0 clamp(4px, 1vw, 5px);">Pedidos</h3>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(8px, 2vw, 10px); letter-spacing:1px; color:#666;">Uber Eats</span>
+    </div>
+    <a href="./Tienda.dc.html" style="padding:clamp(24px, 5vw, 36px) clamp(16px, 4vw, 20px); border-right:1px solid #2a2420; text-decoration:none; display:flex; flex-direction:column; justify-content:center;">
+      <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3.5vw, 18px); color:#FFF7EA; margin:0 0 clamp(4px, 1vw, 5px);">Tienda</h3>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(8px, 2vw, 10px); letter-spacing:1px; color:#666;">Merch oficial</span>
+    </a>
+
+  </div>
+  <div style="background:#0a0a0a; text-align:center; padding:clamp(14px, 3vw, 18px) clamp(16px, 4vw, 20px); font-family:'Space Mono',monospace; font-size:clamp(8px, 2vw, 10px); letter-spacing:1.5px; color:#555;">© D'POYO 2026 · HECHO CON CALLE Y PICANTE</div>
+
+
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100vh&quot;}}">
+class Component extends DCLogic {
+  state = { 
+    cart: [],
+    currentLocation: "Estado 23, Santiago, Chile",
+    stock: {
+      polera: 15,
+      taza: 20,
+      mug: 18,
+      gorra: 12,
+      figuras: 25,
+      poleron: 8,
+      vasos: 30
+    }
+  };
+
+  getStock = (product) => {
+    const s = this.state.stock[product] || 0;
+    return s > 0 ? s : 'AGOTADO';
+  };
+
+  addToCart = (e) => {
+    const product = e.target.getAttribute('data-product');
+    if (this.state.stock[product] > 0) {
+      alert(`✓ ${product.toUpperCase()} agregado al carrito!`);
+    } else {
+      alert('Producto agotado');
+    }
+  };
+
+  selectLocation = (e) => {
+    const location = e.target.closest('div').querySelector('p').textContent;
+    this.setState({ currentLocation: location });
+    this.updateMap(location);
+  };
+
+  scrollToMap = () => {
+    const mapSection = document.querySelector('[data-story-grid]');
+    if (mapSection) {
+      mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  updateMap = (location) => {
+    const mapEmbed = document.getElementById('locationMap');
+    if (!mapEmbed) return;
+
+    let embedUrl = '';
+    if (location.includes('Estado 23')) {
+      embedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.7208385934847!2d-70.66381!3d-33.43729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665320f3e5c5555%3A0x1234567890ab!2sEstado%2023%2C%20Santiago%2C%20Chile!5e0!3m2!1ses!2scl!4v1719100000000';
+    } else if (location.includes('Huerfanos')) {
+      embedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.6854651!2d-70.6387!3d-33.4398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665316e!2sHu%C3%A9rfanos%20859%2C%20Santiago!5e0!3m2!1ses!2scl!4v1719100000000';
+    }
+    mapEmbed.src = embedUrl;
+  };
+
+  renderVals() {
+    return {
+      getStock: this.getStock,
+      addToCart: this.addToCart,
+      selectLocation: this.selectLocation,
+      scrollToMap: this.scrollToMap,
+      cartCount: this.state.cart.length || 0,
+      currentLocation: this.state.currentLocation
+    };
+  }
+}
+</script>
+</body>
+</html>
