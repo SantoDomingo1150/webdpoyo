@@ -77,6 +77,20 @@
           if (!document.hidden) v.play().catch(function(){});
         });
         tryPlay();
+        v.addEventListener('error', function() {
+          var e = v.error;
+          var msg = 'VIDEO ERROR code=' + (e ? e.code : 'unknown') + ' msg=' + (e ? e.message : '');
+          var d = document.createElement('div');
+          d.textContent = msg;
+          d.style.cssText = 'position:absolute;top:0;left:0;z-index:99;background:red;color:white;padding:8px;font-size:14px;font-family:monospace;';
+          v.parentElement.appendChild(d);
+        });
+        setTimeout(function() {
+          var d = document.createElement('div');
+          d.textContent = 'DEBUG: readyState=' + v.readyState + ' networkState=' + v.networkState + ' paused=' + v.paused + ' error=' + (v.error ? v.error.code : 'none');
+          d.style.cssText = 'position:absolute;top:0;left:0;z-index:99;background:lime;color:black;padding:8px;font-size:14px;font-family:monospace;';
+          v.parentElement.appendChild(d);
+        }, 3000);
       })();
     </script>
     <div style="position:absolute; inset:0; background:#000; opacity:.35;"></div>
