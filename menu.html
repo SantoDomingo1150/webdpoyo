@@ -1,8 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="es-CL">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menú D'Poyo — Combos, Súper Conos, Alitas y Papas</title>
+<meta name="description" content="Revisa el menú completo de D'Poyo: combos, súper conos con salsas peruanas, alitas, papas y strips crocantes. Precios y descripciones de cada producto.">
+<link rel="canonical" href="https://www.dpoyo.cl/menu.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Menú D'Poyo — Combos, Súper Conos y Alitas">
+<meta property="og:description" content="Combos, súper conos con salsas peruanas, alitas, papas y strips crocantes.">
+<meta property="og:image" content="https://www.dpoyo.cl/pollo-frito-bg.png">
+<meta property="og:url" content="https://www.dpoyo.cl/menu.html">
+<meta property="og:locale" content="es_CL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Menú D'Poyo">
+<meta name="twitter:description" content="Combos, súper conos con salsas peruanas, alitas, papas y strips crocantes.">
+<meta name="twitter:image" content="https://www.dpoyo.cl/pollo-frito-bg.png">
+<link rel="icon" href="/cresta-negra-mqpmzec3.png">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -41,7 +55,19 @@
       <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:clamp(12px, 2.5vw, 18px); max-width:1100px; margin:0 auto;">
         <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
           <button onClick="{{ openCategory }}" data-cat-id="{{ cat.id }}" style="background:#1C1714; border:2px solid #2a2420; border-radius:8px; padding:clamp(20px, 4vw, 28px) clamp(12px, 2.5vw, 16px); display:flex; flex-direction:column; align-items:center; gap:10px; cursor:pointer; transition:border-color .2s ease;">
-            <span style="font-size:clamp(32px, 7vw, 44px); line-height:1;">{{ cat.icon }}</span>
+            <sc-if value="{{ cat.isCone }}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 64 64" style="width:clamp(32px, 7vw, 44px); height:clamp(32px, 7vw, 44px);">
+                <path d="M11 30 L53 30 L34 60 Q32 62 30 60 Z" fill="#FFC629" stroke="#1C1714" stroke-width="3.5"></path>
+                <line x1="17" y1="40" x2="47" y2="40" stroke="#1C1714" stroke-width="2.5"></line>
+                <line x1="21" y1="50" x2="43" y2="50" stroke="#1C1714" stroke-width="2.5"></line>
+                <rect x="16" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(-9 21 22)"></rect>
+                <rect x="27" y="4" width="10" height="30" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3"></rect>
+                <rect x="38" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(9 43 22)"></rect>
+              </svg>
+            </sc-if>
+            <sc-if value="{{ !cat.isCone }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:clamp(32px, 7vw, 44px); line-height:1;">{{ cat.icon }}</span>
+            </sc-if>
             <span style="font-family:'Anton',sans-serif; font-size:clamp(12px, 2.6vw, 14px); color:#FFF7EA; letter-spacing:0.6px; text-align:center;">{{ cat.name }}</span>
           </button>
         </sc-for>
@@ -55,13 +81,39 @@
       <div style="max-width:900px; margin:0 auto;">
         <button onClick="{{ closeCategory }}" style="background:none; border:none; color:#FFC629; font-family:'Space Mono',monospace; font-size:clamp(11px, 2.5vw, 13px); letter-spacing:1px; cursor:pointer; padding:0 0 clamp(20px, 4vw, 28px); display:flex; align-items:center; gap:6px;">← VOLVER A CATEGORÍAS</button>
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:clamp(20px, 4vw, 28px);">
-          <span style="font-size:clamp(32px, 6vw, 40px);">{{ selectedCategory.icon }}</span>
+          <sc-if value="{{ selectedCategory.isCone }}" hint-placeholder-val="{{ false }}">
+            <svg viewBox="0 0 64 64" style="width:clamp(32px, 6vw, 40px); height:clamp(32px, 6vw, 40px);">
+              <path d="M11 30 L53 30 L34 60 Q32 62 30 60 Z" fill="#FFC629" stroke="#1C1714" stroke-width="3.5"></path>
+              <line x1="17" y1="40" x2="47" y2="40" stroke="#1C1714" stroke-width="2.5"></line>
+              <line x1="21" y1="50" x2="43" y2="50" stroke="#1C1714" stroke-width="2.5"></line>
+              <rect x="16" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(-9 21 22)"></rect>
+              <rect x="27" y="4" width="10" height="30" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3"></rect>
+              <rect x="38" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(9 43 22)"></rect>
+            </svg>
+          </sc-if>
+          <sc-if value="{{ !selectedCategory.isCone }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:clamp(32px, 6vw, 40px);">{{ selectedCategory.icon }}</span>
+          </sc-if>
           <h2 style="font-family:'Anton',sans-serif; font-size:clamp(24px, 6vw, 36px); color:#FFC629; letter-spacing:1px;">{{ selectedCategory.name }}</h2>
         </div>
         <div style="display:grid; grid-template-columns:1fr; gap:clamp(10px, 2vw, 14px);">
           <sc-for list="{{ selectedCategory.items }}" as="item" hint-placeholder-count="3">
             <div style="background:#1C1714; border:1px solid #2a2420; border-radius:8px; padding:clamp(16px, 3vw, 20px); display:flex; align-items:center; gap:clamp(14px, 3vw, 18px);">
-              <div style="width:clamp(48px, 10vw, 60px); height:clamp(48px, 10vw, 60px); background:#2a2420; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:clamp(20px, 4vw, 26px);">{{ selectedCategory.icon }}</div>
+              <div style="width:clamp(48px, 10vw, 60px); height:clamp(48px, 10vw, 60px); background:#2a2420; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:clamp(20px, 4vw, 26px);">
+                <sc-if value="{{ selectedCategory.isCone }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 64 64" style="width:70%; height:70%;">
+                    <path d="M11 30 L53 30 L34 60 Q32 62 30 60 Z" fill="#FFC629" stroke="#1C1714" stroke-width="3.5"></path>
+                    <line x1="17" y1="40" x2="47" y2="40" stroke="#1C1714" stroke-width="2.5"></line>
+                    <line x1="21" y1="50" x2="43" y2="50" stroke="#1C1714" stroke-width="2.5"></line>
+                    <rect x="16" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(-9 21 22)"></rect>
+                    <rect x="27" y="4" width="10" height="30" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3"></rect>
+                    <rect x="38" y="10" width="10" height="24" rx="3" fill="#FFF7EA" stroke="#1C1714" stroke-width="3" transform="rotate(9 43 22)"></rect>
+                  </svg>
+                </sc-if>
+                <sc-if value="{{ !selectedCategory.isCone }}" hint-placeholder-val="{{ true }}">
+                  {{ selectedCategory.icon }}
+                </sc-if>
+              </div>
               <div style="flex:1;">
                 <h3 style="font-family:'Anton',sans-serif; font-size:clamp(14px, 3vw, 17px); color:#FFF7EA; letter-spacing:0.5px; margin:0;">{{ item.name }}</h3>
                 <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ false }}">
@@ -87,42 +139,35 @@ class Component extends DCLogic {
 
   categories = [
     { id: 'combos', icon: '🍗', name: "COMBOS", items: [
-      { name: "COMBO ALITAS", desc: "4 Alas + papa regular + Bebida", price: "" },
-      { name: "COMBO CHICKEN STRIPS", desc: "3 Strips + papa regular + Bebida", price: "" },
-      { name: "COMBO 2 PRESAS", desc: "2 Presas + papa regular + Bebida", price: "" },
-      { name: "COMBO CHICKEN POP", desc: "Chicken Pop + papa regular + Bebida", price: "" },
-      { name: "CAJITA D'KIDS", desc: "Chicken pop o nuggets + papas fritas + jugo o bebida + corona y juguete", price: "" },
-      { name: "COMBO FAMILIAR \"XL\"", desc: "6 Strips + 6 Alas + 4 Presas + Chicken Pop + 6 Empanadas + 2 Ensalada de Repollo + 1 Papa Familiar + 1 Bebida 1.5LT", price: "" },
-      { name: "COMBO FAMILIAR \"L\"", desc: "12 Strips + 1 Papa Familiar + 6 Empanadas + 1 Ensalada Repollo + 4 Vasos de Bebida", price: "" },
-      { name: "COMBO MIX", desc: "4 Alas + 2 Presas + Chicken Pop + 1 Ensalada de Repollo + 2 Papas Regulares + 2 Vasos de Bebida", price: "" },
+      { name: "CAJITA D'KIDS", desc: "Chicken pop o nuggets + papas fritas + jugo o bebida + corona y juguete", price: "$5.400" },
+      { name: "COMBO CHICKEN POP", desc: "Chicken Pop + papa regular + Bebida", price: "$6.890" },
+      { name: "COMBO ALITAS", desc: "4 Alas + papa regular + Bebida", price: "$7.290" },
+      { name: "COMBO CHICKEN STRIPS", desc: "3 Strips + papa regular + Bebida", price: "$7.290" },
+      { name: "COMBO 2 PRESAS", desc: "2 Presas + papa regular + Bebida", price: "$7.290" },
+      { name: "COMBO MIX", desc: "4 Alas + 2 Presas + Chicken Pop + 1 Ensalada de Repollo + 2 Papas Regulares + 2 Vasos de Bebida", price: "$15.890" },
+      { name: "COMBO FAMILIAR \"L\"", desc: "12 Strips + 1 Papa Familiar + 6 Empanadas + 1 Ensalada Repollo + 4 Vasos de Bebida", price: "$19.890" },
+      { name: "SUPER ALAS (25uni)", desc: "Papas regulares + Todas las salsas Super Cono + 4 Vasos de Bebida", price: "$27.870" },
+      { name: "COMBO FAMILIAR \"XL\"", desc: "6 Strips + 6 Alas + 4 Presas + Chicken Pop + 6 Empanadas + 2 Ensalada de Repollo + 1 Papa Familiar + 1 Bebida 1.5LT", price: "$33.490" },
     ]},
     { id: 'papas', icon: '🍟', name: "PAPAS & STRIPS", items: [
-      { name: "SALCHIPAPAS", price: "$X.XXX" },
-      { name: "PAPAS DELUXE", price: "$X.XXX" },
-      { name: "STRIPS TAKIS", price: "$X.XXX" },
-      { name: "STRIPS DELUXE", price: "$X.XXX" },
+      { name: "SALCHIPAPAS", desc: "Clásica / Deshilachado / Chicken Pop / A lo Pobre — No incluye bebida", price: "$6.290" },
+      { name: "5 ALITAS TAKIS", desc: "Con papas fritas — No incluye bebida", price: "$5.290" },
+      { name: "5 STRIPS TAKIS", desc: "Con papas fritas — No incluye bebida", price: "$5.890" },
+      { name: "STRIPS DELUXE", desc: "Papas fritas, Strips D'Poyo, salsa de la casa, ensalada y bebida", price: "$7.490" },
+      { name: "PAPAS DELUXE", desc: "Queso: Llanero / Cheddar o Parmesano — Elige 2 salsas: de la casa, tocineta, mayo de ajo, mayo casera, lactonesa cilantro", price: "$5.490" },
     ]},
-    { id: 'conos', icon: '🍦', name: "SUPER CONO", items: [
-      { name: "ALITAS TAKIS", price: "" },
-      { name: "ALITAS BBQ", price: "" },
-      { name: "ALITAS ACEVICHADAS", price: "" },
-      { name: "ALITAS MARACUYA", price: "" },
-      { name: "ALITAS DRAGÓN", price: "" },
-      { name: "CARRETILLA", price: "" },
-      { name: "LOMO SALTADO", price: "" },
-      { name: "AJÍ DE GALLINA", price: "" },
-      { name: "FRITO DE CERDO", price: "" },
-      { name: "POLLO MOSTAZA", price: "" },
-      { name: "CARNE MECHADA", price: "" },
-    ]},
-    { id: 'alitas', icon: '🔥', name: "ALITAS", items: [
-      { name: "SUPER ALAS", price: "$X.XXX" },
-    ]},
-    { id: 'kids', icon: '👶', name: "D'KIDS", items: [
-      { name: "CAJITA D'KIDS", price: "$X.XXX" },
-    ]},
-    { id: 'bebidas', icon: '🍋', name: "BEBIDAS", items: [
-      { name: "D'FRESH", price: "$X.XXX" },
+    { id: 'conos', icon: '🍦', isCone: true, name: "SUPER CONO", items: [
+      { name: "ALITAS TAKIS", desc: "Alitas rebozadas en Takis con un toque picante. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "ALITAS BBQ", desc: "Alitas doradas cubiertas con salsa BBQ y ligeramente dulce. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "ALITAS ACEVICHADAS", desc: "Alitas bañadas en cremosa salsa acevichada con el auténtico sabor peruano. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "ALITAS MARACUYA", desc: "Alitas crujientes con salsa de maracuyá, el equilibrio perfecto entre dulce y tropical. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "ALITAS DRAGÓN", desc: "Alitas bañadas en salsa Dragón con un intenso sabor dulce y picante. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "CARRETILLA", desc: "Generosa mezcla de carnes al estilo peruano, llena de sabor. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "LOMO SALTADO", desc: "Jugosa carne salteada al wok con cebolla y tomate al estilo peruano. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "AJÍ DE GALLINA", desc: "Pollo deshilachado en cremosa salsa de ají amarillo con receta tradicional. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "FRITO DE CERDO", desc: "Crujientes trozos de cerdo dorados con auténtico sabor casero. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "POLLO MOSTAZA", desc: "Pollo dorado bañado en cremosa salsa de mostaza. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
+      { name: "CARNE MECHADA", desc: "Carne mechada cocinada lentamente, jugosa y llena de sabor. Incluye papas fritas, salsas y bebida.", price: "$7.190" },
     ]},
     { id: 'salsas', icon: '🌶️', name: "SALSAS", items: [
       { name: "SALSEATE", price: "$X.XXX" },
